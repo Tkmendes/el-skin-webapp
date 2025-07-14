@@ -6,14 +6,15 @@ const Imput = styled.input`
     height: 47px;
     top: 16px;
     left: 211px;
-    angle: 0 deg;
     opacity: 1;
-    
     border-radius: 8px;
+    background-color: #878787;
+    display: flex;
 
     &::placeholder {
-        color: #878787;
+        color: #000000;
         font-size: 16px;
+        
     }
 
     &::focus {

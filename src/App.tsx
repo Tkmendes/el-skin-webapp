@@ -8,7 +8,7 @@ function App() {
 
     
     
-      <HeaderComponents></HeaderComponents>
+      <HeaderComponents/>
     
   );
 }
