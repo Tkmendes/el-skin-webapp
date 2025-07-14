@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderComponents from './Componentes/headerComponents';
+import HeaderComponents from './Componentes/Header/headerComponents';
 
 import './App.css';
 

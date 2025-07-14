@@ -1,6 +1,7 @@
 
 import styled from "styled-components"
-import LogoHeader from "./Logo/logo"
+import LogoHeader from "../Logo/logo"
+import Pesquisa from "../Pesquisa/PesquisaContainer"
 
 const HeaderContainer = styled.header`
   background-color: #ffffff; 
@@ -16,7 +17,9 @@ const HeaderTop = styled.div`
 function HeaderComponents(){
         return(
             <HeaderContainer>
-                <LogoHeader><p>ALL SKIN</p></LogoHeader>
+                <LogoHeader><p>ALL SKIN</p>
+                <Pesquisa/>
+                </LogoHeader>
                 <HeaderTop></HeaderTop>
             </HeaderContainer>
 
