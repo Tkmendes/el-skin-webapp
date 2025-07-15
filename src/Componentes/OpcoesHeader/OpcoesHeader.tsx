@@ -2,10 +2,16 @@ import styled from "styled-components"
 
 const Opcoes = styled.ul`
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 96px;
+    position: absolute;
+    left: calc(50% - 631px/2 - 260.5px);
+    margin: 0px;
 `
 const Opcao = styled.li`
-    font-size: 16px;
-    display: flex;
+    font-size: 14px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -14,7 +20,9 @@ const Opcao = styled.li`
     cursor: pointer;
     min-width: 120px;
     list-style: none;
+    
 `
+   
 
 const textoOpcoes = ['Categorias', 'Tipo de pele', 'Necessidade', 'Ingredientes']
 

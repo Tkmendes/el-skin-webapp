@@ -3,6 +3,7 @@ import styled from "styled-components"
 import LogoHeader from "../Logo/logo"
 import Pesquisa from "../Pesquisa/PesquisaContainer"
 import OpcoesHeader from "../OpcoesHeader/OpcoesHeader"
+import CartButton from "../CartButton/cartButton"
 
 const Container = styled.div`
   max-width: 1200px; 
@@ -10,7 +11,7 @@ const Container = styled.div`
   padding: 0 1rem; 
   display: flex; 
   align-items: center; 
-  justify-content: center; 
+  justify-content: space-between; 
 `
 
 const HeaderContainer = styled.header`
@@ -32,19 +33,21 @@ const LogoTxt = styled.p`
 function HeaderComponents(){
         return(
           
-            <HeaderContainer>
-              <Container>
+          <HeaderContainer>
+              <HeaderTop>
+                <Container>
                 
-                <LogoHeader>
-                  <LogoTxt>ALL SKIN</LogoTxt>
-                </LogoHeader>
-                <HeaderTop>
-                <Pesquisa/>
-                
-                <OpcoesHeader/>
-                </HeaderTop>
-              </Container>
-            </HeaderContainer>
+                  <LogoHeader>
+                    <LogoTxt>ALL SKIN</LogoTxt>
+                  </LogoHeader>
+                  <Pesquisa/>
+                  <CartButton/>
+                 
+                  </Container>
+                  
+              </HeaderTop> 
+              <OpcoesHeader/>
+          </HeaderContainer>
          
         );
 

@@ -21,9 +21,9 @@ const ButtonHeader = styled.button`
 
 function Button (){
     return (
-        <button onClick={() => alert('Button clicked!')}>
+        <ButtonHeader>
           <FontAwesomeIcon icon={faSearch} />
-        </button>
+        </ButtonHeader>
     )
 };
 

@@ -7,9 +7,6 @@ const LogoHeader = styled.div`
     margin: 0; 
     letter-spacing: 0.5px; 
     font-family: Shippori Antique;
-    line-height: 100%;
-    display: flex;
-    
     
     
 `

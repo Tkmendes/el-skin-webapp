@@ -1,15 +1,20 @@
 import React from 'react';
 import HeaderComponents from './Componentes/Header/headerComponents';
+import styled from 'styled-components';
 
-import './App.css';
+
+
+const AppDiv = styled.div`
+  text-align: center;
+`
 
 function App() {
   return (
 
     
-    
+    <AppDiv>
       <HeaderComponents/>
-    
+    </AppDiv>
   );
 }
 
