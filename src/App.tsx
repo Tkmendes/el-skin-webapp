@@ -1,6 +1,6 @@
 import React from 'react';
-import HeaderComponents from './Componentes/Header/headerComponents';
 import styled from 'styled-components';
+import Home from './Pages/Home';
 
 
 
@@ -13,7 +13,8 @@ function App() {
 
     
     <AppDiv>
-      <HeaderComponents/>
+      <Home/>
+      
     </AppDiv>
   );
 }

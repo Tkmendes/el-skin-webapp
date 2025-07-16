@@ -20,6 +20,7 @@ const Opcao = styled.li`
     cursor: pointer;
     min-width: 120px;
     list-style: none;
+    font-weight: bold;
     
 `
    

@@ -5,6 +5,7 @@ import Pesquisa from "../Pesquisa/PesquisaContainer"
 import OpcoesHeader from "../OpcoesHeader/OpcoesHeader"
 import CartButton from "../CartButton/cartButton"
 
+
 const Container = styled.div`
   max-width: 1200px; 
   margin: 0 auto; 
@@ -28,7 +29,10 @@ const LogoTxt = styled.p`
   vertical-align: baseline;
   
 `
-
+const OpcoesContainer = styled.div`
+  padding: 1rem 0;
+  margin-top: 2.5rem;
+`
 
 function HeaderComponents(){
         return(
@@ -38,15 +42,18 @@ function HeaderComponents(){
                 <Container>
                 
                   <LogoHeader>
-                    <LogoTxt>ALL SKIN</LogoTxt>
+                      <LogoTxt>ALL SKIN</LogoTxt>
                   </LogoHeader>
+                  
                   <Pesquisa/>
                   <CartButton/>
-                 
-                  </Container>
-                  
+
+                  <OpcoesContainer>
+                      <OpcoesHeader/>
+                  </OpcoesContainer>
+
+                </Container>
               </HeaderTop> 
-              <OpcoesHeader/>
           </HeaderContainer>
          
         );
