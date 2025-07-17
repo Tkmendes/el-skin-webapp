@@ -1,10 +1,11 @@
 
 import React from 'react';
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dadosBanner } from "../DadosBanner/dadosBanner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -125,6 +126,18 @@ function BannerContainer(){
     function nextItem() {
         setIdxItemAtual((prevIdx) => (prevIdx === dadosBanner.length - 1 ? 0 : prevIdx + 1));
     }
+    
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setIdxItemAtual(prevIdxItemAtual => {
+            return (prevIdxItemAtual + 1) % dadosBanner.length;
+      });
+    }, 10000);
+
+    return () => {
+      clearInterval(timer);
+    };
+    }, []);
   
     return(
         <BannerSection color={dadosBanner[idxItemAtual].src}>
