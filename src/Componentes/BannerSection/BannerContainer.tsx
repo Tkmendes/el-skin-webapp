@@ -7,11 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 
-
-
-
-
-
 const BannerSection = styled.section`
     position: relative;
     min-height: 500px;
@@ -19,7 +14,7 @@ const BannerSection = styled.section`
     align-items: center;
      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 40%, transparent 60%),
               linear-gradient(45deg, #f8f6f3 0%, #e8e4e0 100%);
-    background-image: url("${(props) => props.color}");
+    background-image: none;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -140,7 +135,7 @@ function BannerContainer(){
     }, []);
   
     return(
-        <BannerSection color={dadosBanner[idxItemAtual].src}>
+        <BannerSection style={{backgroundImage: `url('${dadosBanner[idxItemAtual].src}')`}}>
             <CarouselContainer>
                 <CarouselContent>
                     <CarouselNavButton aria-label="Voltar" onClick={previousItem}>

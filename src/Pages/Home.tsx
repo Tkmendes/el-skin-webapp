@@ -1,6 +1,7 @@
 import HeaderComponents from "../Componentes/Header/headerComponents";
 import BannerContainer from "../Componentes/BannerSection/BannerContainer";
 import ProductGrid from "../Componentes/ProductGrid/productGrid";
+import Footer from "../Componentes/Footer/footer";
 
 
 function Home(){
@@ -10,6 +11,7 @@ function Home(){
             <HeaderComponents/>
             <BannerContainer/>
             <ProductGrid/>
+            <Footer/>
             
         </div>
     )

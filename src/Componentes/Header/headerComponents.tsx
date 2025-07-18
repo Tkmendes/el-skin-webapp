@@ -1,6 +1,6 @@
 
 import styled from "styled-components"
-import LogoHeader from "../Logo/logo"
+import Logo from "../Logo/logo"
 import Pesquisa from "../Pesquisa/PesquisaContainer"
 import OpcoesHeader from "../OpcoesHeader/OpcoesHeader"
 import CartButton from "../CartButton/cartButton"
@@ -41,9 +41,8 @@ function HeaderComponents(){
               <HeaderTop>
                 <Container>
                 
-                  <LogoHeader>
-                      <LogoTxt>ALL SKIN</LogoTxt>
-                  </LogoHeader>
+                  <Logo/>
+                      
                   
                   <Pesquisa/>
                   <CartButton/>
