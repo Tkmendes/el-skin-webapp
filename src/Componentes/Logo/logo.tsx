@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const LogoHeader = styled.div`
     font-size: 24px; 
     font-weight: bold;
@@ -11,15 +12,17 @@ const LogoHeader = styled.div`
     
 `
 
+
 const LogoTxt = styled.p`
   vertical-align: baseline;
   
 `
 function Logo(props){
     return(
-        <LogoHeader>
-            <LogoTxt>ALL SKIN</LogoTxt>
-        </LogoHeader>
+        
+            <LogoHeader>
+                <LogoTxt>ALL SKIN</LogoTxt>    
+            </LogoHeader>
 
     )
 }

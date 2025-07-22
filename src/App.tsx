@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Home from './Pages/Home';
+
+import Router from '../src/routes'
 
 
 
@@ -13,7 +14,8 @@ function App() {
 
     
     <AppDiv>
-      <Home/>
+      
+      <Router/>
       
     </AppDiv>
   );

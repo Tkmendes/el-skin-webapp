@@ -4,6 +4,7 @@ import Logo from "../Logo/logo"
 import Pesquisa from "../Pesquisa/PesquisaContainer"
 import OpcoesHeader from "../OpcoesHeader/OpcoesHeader"
 import CartButton from "../CartButton/cartButton"
+import { Link } from "react-router-dom"
 
 
 const Container = styled.div`
@@ -40,9 +41,9 @@ function HeaderComponents(){
           <HeaderContainer>
               <HeaderTop>
                 <Container>
-                
-                  <Logo/>
-                      
+                  <Link to={"/"}>
+                    <Logo/>
+                  </Link>    
                   
                   <Pesquisa/>
                   <CartButton/>
