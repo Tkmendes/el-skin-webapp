@@ -19,10 +19,10 @@ const ButtonHeader = styled.button`
     transition: background-color 0.3s ease;          
 `
 
-function Button (){
+function Button() {
     return (
         <ButtonHeader>
-          <FontAwesomeIcon icon={faSearch} />
+            <FontAwesomeIcon icon={faSearch} />
         </ButtonHeader>
     )
 };

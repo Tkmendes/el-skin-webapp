@@ -67,30 +67,30 @@ const ProductDescription = styled.p`
     overflow: hidden;
 `
 
-const ProductTags = styled.div`
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-`
+// const ProductTags = styled.div`
+//     display: flex;
+//     gap: 8px;
+//     margin-bottom: 16px;
+//     flex-wrap: wrap;
+// `
 
- const ProductTag = styled.div`
-    padding: 4px 12px;
-    border-radius: 16px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+//  const ProductTag = styled.div`
+//     padding: 4px 12px;
+//     border-radius: 16px;
+//     font-size: 11px;
+//     font-weight: 600;
+//     text-transform: uppercase;
+//     letter-spacing: 0.5px;
 
-  .protection{
-    background-color: #E3F2FD;
-    color: #1976D2;
-  }
-  .face{
-    background-color: #FCE4EC;
-    color: #C2185B;
-  }
-`
+//   .protection{
+//     background-color: #E3F2FD;
+//     color: #1976D2;
+//   }
+//   .face{
+//     background-color: #FCE4EC;
+//     color: #C2185B;
+//   }
+// `
 
 const ProductFooter = styled.footer`
     display: flex;
@@ -137,8 +137,8 @@ export interface IProduct {
     name: string;
     description: string;
     price: number;
-    src: string;
-    
+    image: string;
+
 }
 
 interface ProductCardProps {
@@ -146,25 +146,25 @@ interface ProductCardProps {
     onProductClick: (productId: string) => void;
     onBuyClick: (productId: string, event: React.MouseEvent) => void;
 }
- 
+
 const ProductCard: React.FC<ProductCardProps> = ({
     product,
     onProductClick,
     onBuyClick
 }) => {
-        const formatPrice = (price: number): string => {
-            return `R$ ${price.toFixed(2).replace('.', ',')}`;
-        };
-        return(
-            <ProductcardA onClick={() => onProductClick(product.id)}>
-                <ProductImage>
-                    <img src={product.src} alt={product.name}/>
-                </ProductImage>
-                <ProductInfo>
-                    <ProductName>{product.name}</ProductName>
-                    <ProductDescription>{product.description}</ProductDescription>
+    const formatPrice = (price: number): string => {
+        return `R$ ${price.toFixed(2).replace('.', ',')}`;
+    };
+    return (
+        <ProductcardA onClick={() => onProductClick(product.id)}>
+            <ProductImage>
+                <img src={product.image} alt={product.name} />
+            </ProductImage>
+            <ProductInfo>
+                <ProductName>{product.name}</ProductName>
+                <ProductDescription>{product.description}</ProductDescription>
 
-                    {/* <ProductTags>
+                {/* <ProductTags>
                         {product.tags.map((tag) => (
                             <span 
                                 key={`${product.id}-${tag.label}-${tag.type}`}
@@ -174,23 +174,23 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             </span>
                         ))}
                     </ProductTags> */}
-                    <ProductFooter>
-                        <ProductPrice>
-                            {formatPrice(product.price)}
-                        </ProductPrice>
+                <ProductFooter>
+                    <ProductPrice>
+                        {formatPrice(product.price)}
+                    </ProductPrice>
                     <ProductBuyButton
                         onClick={(e) => onBuyClick(product.id, e)}
                         type="button">
                         comprar
-                    </ProductBuyButton> 
-                    </ProductFooter>
+                    </ProductBuyButton>
+                </ProductFooter>
 
-                </ProductInfo>
+            </ProductInfo>
 
-            </ProductcardA>
-        )
+        </ProductcardA>
+    )
 
-    };
+};
 
 
 export default ProductCard;

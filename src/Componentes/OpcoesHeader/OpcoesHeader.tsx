@@ -23,16 +23,16 @@ const Opcao = styled.li`
     font-weight: bold;
     
 `
-   
+
 
 const textoOpcoes = ['Categorias', 'Tipo de pele', 'Necessidade', 'Ingredientes']
 
-function OpcoesHeader(){
-    return(
-    <Opcoes>
-          { textoOpcoes.map ( (texto)  => (
-              <Opcao key={texto}><p>{texto}</p></Opcao>
-          ))}
+function OpcoesHeader() {
+    return (
+        <Opcoes>
+            {textoOpcoes.map((texto) => (
+                <Opcao key={texto}><p>{texto}</p></Opcao>
+            ))}
         </Opcoes>
     );
 }

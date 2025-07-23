@@ -1,9 +1,11 @@
-import { DadosProduct } from "../DadosProduct/dadosProduct";
+//import { DadosProduct } from "../DadosProduct/dadosProduct";
 import styled from "styled-components";
-import ProductCard, { IProduct } from "../ProductCard/productCard"
-import React from "react";
+import ProductCard from "../ProductCard/productCard"
+import React, { useEffect, useState } from "react";
+import { IProduct } from "../ProductCard/productCard";
+import axios from "axios";
 
-const ProductGriSection =  styled.section`
+const ProductGriSection = styled.section`
     padding: 60px 20px;
     background-color: #ffffff;
 `
@@ -12,7 +14,7 @@ const ProductGridContainer = styled.div`
     margin: 0 auto;
 `
 
-const ProductGridTitle= styled.div`
+const ProductGridTitle = styled.div`
     text-align: center;
     font-size: 24px;
     font-weight: 600;
@@ -29,9 +31,20 @@ const ProductGridDiv = styled.div`
 `
 
 
- 
-function ProductGrid(){
-    const products = DadosProduct;
+
+function ProductGrid() {
+    //const products = DadosProduct;
+    const [products, setProduct] = useState<IProduct[]>([]);
+
+    useEffect(() => {
+        async function fetchItems() {
+
+            const newItems = await axios.get<IProduct[]>('http://localhost:3001/products');
+            setProduct(newItems.data);
+
+        }
+        fetchItems();
+    }, [])
 
     const handleProductClick = (productId: string) => {
         console.log(`Produto clicado: ${productId}`);
@@ -43,34 +56,27 @@ function ProductGrid(){
     };
 
     const title = "nossos queridinhos estão aqui";
-        return(
-            <ProductGriSection>
-                <ProductGridContainer>
-                    <ProductGridTitle>{title}</ProductGridTitle>
-                    <ProductGridDiv>
-                                {products.map((product) => (
-                                    <ProductCard
-                                        key={product.id}
-                                        product={product}
-                                        onProductClick={handleProductClick}
-                                        onBuyClick={handleBuyClick}
-                                    />
-                                ))}
-                                {products.map((product) => (
-                                    <ProductCard
-                                        key={product.id}
-                                        product={product}
-                                        onProductClick={handleProductClick}
-                                        onBuyClick={handleBuyClick}
-                                    />
-                                ))}                    
+    return (
+        <ProductGriSection>
+            <ProductGridContainer>
+                <ProductGridTitle>{title}</ProductGridTitle>
+                <ProductGridDiv>
 
-                    </ProductGridDiv>
-                </ProductGridContainer>
-            </ProductGriSection>
-            
-            
-        );
+                    {products.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onProductClick={handleProductClick}
+                            onBuyClick={handleBuyClick}
+                        />
+                    ))}
+
+                </ProductGridDiv>
+            </ProductGridContainer>
+        </ProductGriSection>
+
+
+    );
 
 
 }

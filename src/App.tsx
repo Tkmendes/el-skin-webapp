@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Router from '../src/routes'
+import Router from './routes'
 
 
 

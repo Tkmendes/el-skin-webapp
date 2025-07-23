@@ -20,10 +20,10 @@ const CartButtonStyle = styled.button`
     }
 `
 
-function CartButton (){
+function CartButton() {
     return (
         <CartButtonStyle>
-          <FontAwesomeIcon icon={faCartShopping} />
+            <FontAwesomeIcon icon={faCartShopping} />
         </CartButtonStyle>
     )
 };

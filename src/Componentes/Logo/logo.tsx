@@ -17,12 +17,12 @@ const LogoTxt = styled.p`
   vertical-align: baseline;
   
 `
-function Logo(props){
-    return(
-        
-            <LogoHeader>
-                <LogoTxt>ALL SKIN</LogoTxt>    
-            </LogoHeader>
+function Logo(props) {
+    return (
+
+        <LogoHeader>
+            <LogoTxt>ALL SKIN</LogoTxt>
+        </LogoHeader>
 
     )
 }

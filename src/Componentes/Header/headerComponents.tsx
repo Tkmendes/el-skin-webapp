@@ -26,37 +26,34 @@ const HeaderTop = styled.div`
   padding: 1rem 0; 
   border-bottom: 1px solid #e5e5e5;
 `
-const LogoTxt = styled.p`
-  vertical-align: baseline;
-  
-`
+
 const OpcoesContainer = styled.div`
   padding: 1rem 0;
   margin-top: 2.5rem;
 `
 
-function HeaderComponents(){
-        return(
-          
-          <HeaderContainer>
-              <HeaderTop>
-                <Container>
-                  <Link to={"/"}>
-                    <Logo/>
-                  </Link>    
-                  
-                  <Pesquisa/>
-                  <CartButton/>
+function HeaderComponents() {
+  return (
 
-                  <OpcoesContainer>
-                      <OpcoesHeader/>
-                  </OpcoesContainer>
+    <HeaderContainer>
+      <HeaderTop>
+        <Container>
+          <Link to={"/"}>
+            <Logo />
+          </Link>
 
-                </Container>
-              </HeaderTop> 
-          </HeaderContainer>
-         
-        );
+          <Pesquisa />
+          <CartButton />
+
+          <OpcoesContainer>
+            <OpcoesHeader />
+          </OpcoesContainer>
+
+        </Container>
+      </HeaderTop>
+    </HeaderContainer>
+
+  );
 
 }
 
