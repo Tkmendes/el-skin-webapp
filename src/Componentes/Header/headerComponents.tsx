@@ -38,7 +38,10 @@ function HeaderComponents() {
     <HeaderContainer>
       <HeaderTop>
         <Container>
-          <Link to={"/"}>
+          <Link style={{
+            color: 'black',
+            textDecoration: 'none',
+          }} to={"/"}>
             <Logo />
           </Link>
 

@@ -1,9 +1,10 @@
 //import { DadosProduct } from "../DadosProduct/dadosProduct";
 import styled from "styled-components";
 import ProductCard from "../ProductCard/productCard"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IProduct } from "../ProductCard/productCard";
 import axios from "axios";
+import { SearchContext } from "../../Context/searchContext";
 
 const ProductGriSection = styled.section`
     padding: 60px 20px;
@@ -35,6 +36,9 @@ const ProductGridDiv = styled.div`
 function ProductGrid() {
     //const products = DadosProduct;
     const [products, setProduct] = useState<IProduct[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+
+    const { search }  = useContext(SearchContext);
 
     useEffect(() => {
         async function fetchItems() {
@@ -45,6 +49,17 @@ function ProductGrid() {
         }
         fetchItems();
     }, [])
+
+    useEffect(()=> {
+        if(search){
+            setFilteredProducts(products.filter(product =>
+                product.name.toLowerCase().includes(search.toLowerCase()) ||
+                product.description.toLowerCase().includes(search.toLowerCase())
+            ));
+        }else{
+            setFilteredProducts(products);
+        }
+    }, [search, products])
 
     const handleProductClick = (productId: string) => {
         console.log(`Produto clicado: ${productId}`);
@@ -61,8 +76,8 @@ function ProductGrid() {
             <ProductGridContainer>
                 <ProductGridTitle>{title}</ProductGridTitle>
                 <ProductGridDiv>
-
-                    {products.map((product) => (
+                    {filteredProducts.map((product) => (
+                        
                         <ProductCard
                             key={product.id}
                             product={product}

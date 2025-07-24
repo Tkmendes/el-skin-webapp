@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 const Opcoes = styled.ul`
@@ -25,13 +26,18 @@ const Opcao = styled.li`
 `
 
 
-const textoOpcoes = ['Categorias', 'Tipo de pele', 'Necessidade', 'Ingredientes']
+const textoOpcoes = [{ nome: 'Categorias', src: '/categorias' }, { nome: 'Tipo de pele', src: '/tipo' }, { nome: 'Necessidade', src: '/necessidade' }, { nome: 'Ingredientes', src: '/ingredientes' }]
 
 function OpcoesHeader() {
     return (
         <Opcoes>
             {textoOpcoes.map((texto) => (
-                <Opcao key={texto}><p>{texto}</p></Opcao>
+                <Link to={texto.src} key={texto.nome} style={{
+                    color: 'black',
+                    textDecoration: 'none',
+                }}>
+                    <Opcao><p>{texto.nome}</p></Opcao>
+                </Link>
             ))}
         </Opcoes>
     );

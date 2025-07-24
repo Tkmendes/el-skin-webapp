@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HeaderComponents from './Componentes/Header/headerComponents';
 import Footer from './Componentes/Footer/footer';
 import Home from './Pages/Home';
@@ -8,14 +8,18 @@ import NotFound from './Pages/NotFound';
 
 export default function AppRouter() {
     return (
-            <Router>
-                <HeaderComponents/>
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='sobre' element={<About/>}/>
-                    <Route path='*' element={<NotFound/>}/>
-                </Routes>
-                <Footer/>
-            </Router>
+        <Router future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+        }}
+        >
+            <HeaderComponents />
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='sobre' element={<About />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
+            <Footer />
+        </Router>
     );
 }

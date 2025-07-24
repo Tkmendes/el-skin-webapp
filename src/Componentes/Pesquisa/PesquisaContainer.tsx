@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import Imput from "../Imput/input";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { createContext } from "react";
+import { SearchContext } from "../../Context/searchContext";
 
 
 const PesquisaContainer = styled.div`
@@ -30,11 +32,12 @@ const ButtonHeader = styled.button`
     justify-content: center; 
     transition: background-color 0.3s ease;          
 `
-
+const Search = createContext(SearchContext);
 
 
 function Pesquisa() {
-    const [produtosPesquisados, setProdutosPesquisados] = useState('')
+    
+    const {search, setSearch} = useContext(SearchContext);
 
         // const buttonClick = (evento) => {
         //     const produtoDigitado = evento.target.value
@@ -43,22 +46,23 @@ function Pesquisa() {
         // };
     function handleClick(){ 
 
-        console.log(`Você pesquisou por: ${produtosPesquisados}`); 
+
+        console.log(`Você pesquisou por: ${search}`); 
+
 
     };
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>){
         // Atualiza o estado com o valor atual do input.
-        setProdutosPesquisados(e.target.value);
+        setSearch(e.target.value);
     };
   
     return (
         
         <PesquisaContainer>
-            <Imput placeholder="O que você está procurando?" value={produtosPesquisados} onChange={handleInputChange}/>
+            <Imput placeholder="O que você está procurando?" value={search} onChange={handleInputChange}/>
                 <ButtonHeader onClick={handleClick}>
                           <FontAwesomeIcon icon={faSearch} />
                 </ButtonHeader>
-            <p>{produtosPesquisados}</p>
         </PesquisaContainer>
          
         
