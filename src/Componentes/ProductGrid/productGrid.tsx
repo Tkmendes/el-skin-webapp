@@ -1,10 +1,11 @@
 //import { DadosProduct } from "../DadosProduct/dadosProduct";
 import styled from "styled-components";
 import ProductCard from "../ProductCard/productCard"
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { IProduct } from "../ProductCard/productCard";
 import axios from "axios";
 import { SearchContext } from "../../Context/searchContext";
+import { useCartContext } from "../../Context/cartModalContext";
 
 const ProductGriSection = styled.section`
     padding: 60px 20px;
@@ -34,11 +35,13 @@ const ProductGridDiv = styled.div`
 
 
 function ProductGrid() {
+
     //const products = DadosProduct;
     const [products, setProduct] = useState<IProduct[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
-    const { search }  = useContext(SearchContext);
+    const { search } = useContext(SearchContext);
+    const { addItem } = useCartContext();
 
     useEffect(() => {
         async function fetchItems() {
@@ -50,13 +53,13 @@ function ProductGrid() {
         fetchItems();
     }, [])
 
-    useEffect(()=> {
-        if(search){
+    useEffect(() => {
+        if (search) {
             setFilteredProducts(products.filter(product =>
                 product.name.toLowerCase().includes(search.toLowerCase()) ||
                 product.description.toLowerCase().includes(search.toLowerCase())
             ));
-        }else{
+        } else {
             setFilteredProducts(products);
         }
     }, [search, products])
@@ -65,10 +68,18 @@ function ProductGrid() {
         console.log(`Produto clicado: ${productId}`);
     };
 
-    const handleBuyClick = (productId: string, event: React.MouseEvent) => {
+    const handleBuyClick = useCallback((productId: string, event: React.MouseEvent) => {
         event.stopPropagation();
         console.log(`Comprar produto: ${productId}`);
-    };
+
+        const buyProduct = products.find((product) => product.id === productId);
+        if (buyProduct) {
+            addItem(buyProduct);
+        }
+        else {
+            console.log(`Produto não encontrado: ${productId}`);
+        }
+    }, [products, addItem]);
 
     const title = "nossos queridinhos estão aqui";
     return (
@@ -77,7 +88,7 @@ function ProductGrid() {
                 <ProductGridTitle>{title}</ProductGridTitle>
                 <ProductGridDiv>
                     {filteredProducts.map((product) => (
-                        
+
                         <ProductCard
                             key={product.id}
                             product={product}

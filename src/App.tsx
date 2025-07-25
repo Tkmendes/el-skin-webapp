@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Router from './routes'
 import { SearchContext } from './Context/searchContext';
+import { CartModalProvider } from './Context/cartModalContext';
 
 
 
@@ -16,11 +17,13 @@ function App() {
   return (
 
     <AppDiv>
-      <SearchContext value={{ search: search, setSearch: setSearch }}>
-        <Router />
-      </SearchContext>
+      <CartModalProvider>
+        <SearchContext value={{ search: search, setSearch: setSearch }}>
+          <Router />
+        </SearchContext>
+      </CartModalProvider>
     </AppDiv>
-    
+
   );
 }
 
