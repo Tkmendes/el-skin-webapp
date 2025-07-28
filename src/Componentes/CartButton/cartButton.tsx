@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import CartModal from "../CartModal/cartModal";
 import { useState } from "react";
+import { useCartContext } from "../../Context/cartModalContext";
 
 
 const CartButtonStyle = styled.button`
@@ -16,6 +17,7 @@ const CartButtonStyle = styled.button`
     align-items: center; 
     justify-content: center; 
     transition: background-color 0.3s ease; 
+    font-size: 1.1rem;
 
     &::hover{
     background-color: #f0f0f0; 
@@ -23,6 +25,7 @@ const CartButtonStyle = styled.button`
 `
 
 function CartButton() {
+    const {  getTotalItems } = useCartContext();
     const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   
     const handleCloseCart = () => {
@@ -35,7 +38,7 @@ function CartButton() {
     return (
         <>
         <CartButtonStyle onClick={handleOnClickCart}>
-            <FontAwesomeIcon icon={faCartShopping} />
+            <FontAwesomeIcon icon={faCartShopping} /> {getTotalItems()}
         </CartButtonStyle>
         <CartModal isOpen={isCartModalOpen} onClose={handleCloseCart} />
         </>

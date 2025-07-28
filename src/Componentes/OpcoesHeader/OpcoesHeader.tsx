@@ -6,9 +6,9 @@ const Opcoes = styled.ul`
     flex-direction: row;
     align-items: flex-start;
     padding: 0px;
-    gap: 96px;
+    gap: 8rem;
     position: absolute;
-    left: calc(50% - 631px/2 - 260.5px);
+    left: calc(48% - 631px/2 - 260.5px);
     margin: 0px;
 `
 const Opcao = styled.li`
@@ -39,6 +39,7 @@ function OpcoesHeader() {
                     <Opcao><p>{texto.nome}</p></Opcao>
                 </Link>
             ))}
+            <Opcao><p style={{ color: 'red' }}>Kits até 50% OFF</p></Opcao>
         </Opcoes>
     );
 }
