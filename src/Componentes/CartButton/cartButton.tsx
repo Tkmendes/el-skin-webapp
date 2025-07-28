@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import CartModal from "../CartModal/cartModal";
+import { useState } from "react";
 
 
 const CartButtonStyle = styled.button`
@@ -21,10 +23,22 @@ const CartButtonStyle = styled.button`
 `
 
 function CartButton() {
+    const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  
+    const handleCloseCart = () => {
+    setIsCartModalOpen(false);
+  };
+
+    function handleOnClickCart() {
+    setIsCartModalOpen(true);
+  }
     return (
-        <CartButtonStyle>
+        <>
+        <CartButtonStyle onClick={handleOnClickCart}>
             <FontAwesomeIcon icon={faCartShopping} />
         </CartButtonStyle>
+        <CartModal isOpen={isCartModalOpen} onClose={handleCloseCart} />
+        </>
     )
 };
 

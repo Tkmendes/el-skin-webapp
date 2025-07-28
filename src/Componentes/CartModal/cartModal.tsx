@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useCartContext } from "../../Context/cartModalContext";
+import React from "react";
 
 const CartModalOverlay = styled.div`
   position: fixed;
@@ -155,7 +157,7 @@ const QuantityButton = styled.button`
 
 &::hover {
   background: rgba(255, 255, 255, 0.1);
-` 
+`
 
 const QuantityDisplay = styled.span`
   background: #5d5d5d;
@@ -165,7 +167,7 @@ const QuantityDisplay = styled.span`
   font-weight: 500;
   min-width: 40px;
   text-align: center;
-` 
+`
 
 const RemoveButton = styled.button`
   background: none;
@@ -227,20 +229,81 @@ const FinalizeButton = styled.button`
   transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
 `
+interface CartModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-function CartModal() {
-    return (
-        <CartModalOverlay>
-          <CartModalDiv>
-            <CartModalHeader>
-              <CartModalHeaderTitle>Carrinho de Compras</CartModalHeaderTitle>
-              <CartModalCloseButton onClick={() => console.log("Fechar modal")}>
-                &times;
-              </CartModalCloseButton>
-            </CartModalHeader>
-          </CartModalDiv>
-        </CartModalOverlay>
-    );
+
+const CartModal: React.FC<CartModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const { items, updateQuantity, removeItem, getTotalPrice } = useCartContext();
+  if (!isOpen) return null;
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  const handleBackdropKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  return (
+    <CartModalOverlay onClick={handleBackdropClick}
+      onKeyDown={handleBackdropKeyDown}>
+      <CartModalDiv>
+        <CartModalHeader>
+          <CartModalHeaderTitle>Carrinho de Compras</CartModalHeaderTitle>
+          <CartModalCloseButton onClick={onClose}>
+            &times;
+          </CartModalCloseButton>
+        </CartModalHeader>
+
+        <CartModalContent>
+          <CartItems>
+            {items.length > 0 ? (
+              items.map(item => (
+                <CartItem key={item.id}>
+                  <CartItemImage>
+                    <CartItemImageImg src={item.image} alt={item.name} />
+                  </CartItemImage>
+                  <CartItemInfo>
+                    <CartItemName>{item.name}</CartItemName>
+                    <CartItemControls>
+                      <QuantityLabel>Quantidade:</QuantityLabel>
+                      <QuantityControls>
+                        <QuantityButton onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>-</QuantityButton>
+                        <QuantityDisplay>{item.quantity}</QuantityDisplay>
+                        <QuantityButton onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</QuantityButton>
+                      </QuantityControls>
+
+                      <CartItemPrice>R$ {(item.quantity * item.price).toFixed(2)}</CartItemPrice>
+                      <RemoveButton onClick={() => removeItem(item.id)}>Remover</RemoveButton>
+
+                    </CartItemControls>
+                  </CartItemInfo>
+                </CartItem>
+
+              ))
+            ) : (
+              <CartEmpty>Carrinho vazio</CartEmpty>
+            )}
+            <CartTotal>
+              <TotalLabel>Total:</TotalLabel>
+              <TotalPrice>R$ {getTotalPrice().toFixed(2)}</TotalPrice>
+            </CartTotal>
+          </CartItems>
+        </CartModalContent>
+        <FinalizeButton onClick={onClose}>Finalizar Compra</FinalizeButton>
+      </CartModalDiv>
+    </CartModalOverlay>
+  );
 };
 
 export default CartModal;
