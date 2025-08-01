@@ -57,7 +57,7 @@ const ProductImageContainer = styled.div`
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 
-    &::hover{
+    &:hover{
     transform: translateY(-5px);
     }
 `
@@ -107,7 +107,7 @@ const ContactButton = styled.button`
     gap: 10px;
     box-shadow: 0 4px 20px rgba(139, 90, 150, 0.3);
 
-    &::hover{
+    &:hover{
         transform: translateY(-2px);
         box-shadow: 0 6px 25px rgba(139, 90, 150, 0.4);
     }

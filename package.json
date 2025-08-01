@@ -9,14 +9,13 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "axios": "^1.10.0",
+    "cross-env": "^10.0.0",
+    "normalize.css": "^8.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^6.2.1",
@@ -29,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:coverage": "cross-env CI=true react-scripts test --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -50,13 +50,24 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.27.1",
     "@eslint/css": "^0.10.0",
     "@eslint/js": "^9.31.0",
     "@eslint/json": "^0.13.0",
     "@eslint/markdown": "^7.0.0",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.0",
     "typescript-eslint": "^8.37.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/axios.min.js"
+    }
   }
 }

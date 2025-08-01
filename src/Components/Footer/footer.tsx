@@ -40,13 +40,13 @@ const SocialIcon = styled.div`
     transition: all 0.3s ease;
     font-size: 20px;
 
-    &::hover{
+    &:hover{
         background-color: #8B4A8B;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(139, 74, 139, 0.3);
     }
 
-    &::focus{
+    &:focus{
         background-color: #8B4A8B;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(139, 74, 139, 0.3);   
@@ -100,11 +100,11 @@ const FooterLink = styled.div`
     font-family: inherit;
     text-decoration: none;
 
-    &::hover{
+    &:hover{
         color: #8B4A8B;
     }
 
-    &::focus{
+    &:focus{
         outline: 2px solid #8B4A8B;
         outline-offset: 2px;
         border-radius: 2px;   

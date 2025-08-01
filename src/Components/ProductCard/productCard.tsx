@@ -16,12 +16,12 @@ const ProductcardA = styled.a`
     text-align: left;
     font-family: inherit;
 
-    &::hover{
+    &:hover{
         transform: translateY(-4px);
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
     
-    &::focus{
+    &:focus{
         outline: 2px solid #8B4A8B;
         outline-offset: 2px;
     }
@@ -36,7 +36,7 @@ const ProductImage = styled.div`
     justify-content: center;
     overflow: hidden;
 
-    .img{
+    &:img{
         width: 100%;
         height: 100%;
         object-fit: cover;    
@@ -67,30 +67,37 @@ const ProductDescription = styled.p`
     overflow: hidden;
 `
 
-// const ProductTags = styled.div`
-//     display: flex;
-//     gap: 8px;
-//     margin-bottom: 16px;
-//     flex-wrap: wrap;
-// `
+const ProductTags = styled.div`
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+`
 
-//  const ProductTag = styled.div`
-//     padding: 4px 12px;
-//     border-radius: 16px;
-//     font-size: 11px;
-//     font-weight: 600;
-//     text-transform: uppercase;
-//     letter-spacing: 0.5px;
+ const ProductTag = styled.span<{ $tagtype: string }>`
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 
-//   .protection{
-//     background-color: #E3F2FD;
-//     color: #1976D2;
-//   }
-//   .face{
-//     background-color: #FCE4EC;
-//     color: #C2185B;
-//   }
-// `
+    background-color: ${props => {
+        switch (props.$tagtype) {
+            case 'face':
+                return '#FCE4EC';
+            case 'body':
+                return '#E3F2FD';
+            case 'lips':
+                return '#F1F8E9';
+            case 'benefit':
+                return '#5ED4DC';
+            default:
+                return '#F5F5F5';
+        }
+    }};
+
+`
 
 const ProductFooter = styled.footer`
     display: flex;
@@ -116,17 +123,17 @@ const ProductBuyButton = styled.button`
     transition: all 0.3s ease;
     text-transform: lowercase;
 
-    &::hover{
+    &:hover{
         background: linear-gradient(135deg, #7A3E7A 0%, #9333EA 100%);
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(139, 74, 139, 0.3);
     }
     
-    &::active{
+    &:active{
         transform: translateY(0);
     }
-    
-    &::focus{
+     
+    &:focus{
         outline: 2px solid #8B4A8B;
         outline-offset: 2px;
     }
@@ -139,6 +146,7 @@ export interface IProduct {
     price: number;
     image: string;
     quantity: number;
+    tags: [{ label: string, id: number, type: string }];
 
 }
 
@@ -157,7 +165,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         return `R$ ${price.toFixed(2).replace('.', ',')}`;
     };
     return (
-        <ProductcardA onClick={() => onProductClick(product.id)}>
+        <ProductcardA data-testid="product-card" onClick={() => onProductClick(product.id)}>
             <ProductImage>
                 <img src={product.image} alt={product.name} />
             </ProductImage>
@@ -165,16 +173,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 <ProductName>{product.name}</ProductName>
                 <ProductDescription>{product.description}</ProductDescription>
 
-                {/* <ProductTags>
-                        {product.tags.map((tag) => (
-                            <span 
-                                key={`${product.id}-${tag.label}-${tag.type}`}
-                                className={`product-tag product-tag--${tag.type}`}
-                            >   
-                        {tag.label}
-                            </span>
+                <ProductTags>
+                        {product.tags?.map((tag) => (
+                            <ProductTag
+                                key={`${product.id}-${tag.id}`}
+                                $tagtype={`${tag.type}`}
+                            >
+                                {tag.label}
+                            </ProductTag>
                         ))}
-                    </ProductTags> */}
+                    </ProductTags>
                 <ProductFooter>
                     <ProductPrice>
                         {formatPrice(product.price)}

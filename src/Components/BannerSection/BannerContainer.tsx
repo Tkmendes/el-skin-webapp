@@ -49,7 +49,7 @@ const CarouselNavButton = styled.button`
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 
-    &::hover{
+    &:hover{
         background: rgba(255, 255, 255, 0.3);
         transform: translateX(-2px);
     }
@@ -102,13 +102,13 @@ const CarouselCtaButton = styled.button`
     box-shadow: 0 4px 16px rgba(139, 74, 139, 0.3);
     text-transform: lowercase;
 
-    &::hover{
+    &:hover{
         background: linear-gradient(135deg, #7A3E7A 0%, #9333EA 100%);
         transform: translateY(-2px);
         box-shadow: 0 8px 24px rgba(139, 74, 139, 0.4);
     }
     
-    &::active{
+    &:active{
         transform: translateY(0);
     }
 `
@@ -120,17 +120,35 @@ interface ICarouselItem {
     Image: string;
 }
 
-function BannerContainer() {
+const BannerContainer: React.FC = () => {
     const [idxItemAtual, setIdxItemAtual] = useState(0);
 
     const [items, setItems] = useState<ICarouselItem[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchItems() {
-
-            const newItems = await axios.get<ICarouselItem[]>('http://localhost:3001/carousel');
-            setItems(newItems.data);
-
+            try {
+                const newItems = await axios.get<ICarouselItem[]>('http://localhost:3001/carousel');
+                setItems(newItems.data);
+                setError(null);
+            } catch (err) {
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        // O servidor respondeu com um código de status fora do intervalo 2xx
+                        setError(`Erro: ${err.response.status} - ${err.response.data}`);
+                    } else if (err.request) {
+                        // A requisição foi feita, mas nenhuma resposta foi recebida
+                        setError('Erro: Nenhuma resposta do servidor.');
+                    } else {
+                        // Algo aconteceu ao configurar a requisição que disparou um erro
+                        setError(`Erro: ${err.message}`);
+                    }
+                } else {
+                    setError('Erro desconhecido: ' + (err as Error).message);
+                }
+                setItems([]); // Limpa os dados em caso de erro
+            }
         }
         // catch(erro){
         //      console.log(error);

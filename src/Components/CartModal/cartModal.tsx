@@ -155,7 +155,7 @@ const QuantityButton = styled.button`
   transition: background-color 0.2s;
   font-size: 0.9rem;
 
-&::hover {
+&:hover {
   background: rgba(255, 255, 255, 0.1);
 `
 

@@ -1,10 +1,12 @@
 import { ReactNode, createContext, useState, useContext } from "react";
-import { CartContextReturn, useCart } from '../Componentes/Hooks/useCart'
+import { CartContextReturn, useCart } from '../Components/Hooks/useCart'
 
 
 type CartModalContextType = CartContextReturn;
 
 export const CartModalContext = createContext<CartModalContextType | undefined>(undefined);
+
+CartModalContext.displayName = 'Carrinho';
 
 interface CartProviderProps {
   children: ReactNode;

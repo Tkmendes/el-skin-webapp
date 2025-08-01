@@ -7,4 +7,4 @@ export const SearchContext = createContext<{search: string, setSearch: (x: strin
     setSearch: () => null
 });
 
-
+SearchContext.displayName = 'Pesquisa';

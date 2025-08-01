@@ -19,7 +19,7 @@ const CartButtonStyle = styled.button`
     transition: background-color 0.3s ease; 
     font-size: 1.1rem;
 
-    &::hover{
+    &:hover{
     background-color: #f0f0f0; 
     }
 `

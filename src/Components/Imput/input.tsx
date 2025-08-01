@@ -11,13 +11,13 @@ const Imput = styled.input`
     transition: border-color 0.3s ease; 
     background-color: #878787;
 
-    &::placeholder {
+    &:placeholder {
         color: #000000;
         font-size: 16px;
         
     }
 
-    &::focus {
+    &:focus {
         border-color: #007bff;
     }
 `

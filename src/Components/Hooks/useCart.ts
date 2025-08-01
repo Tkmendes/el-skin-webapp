@@ -7,6 +7,7 @@ interface ICartItem {
     price: number;
     quantity: number;
     image: string;
+    
 }
 
 export interface CartContextReturn {

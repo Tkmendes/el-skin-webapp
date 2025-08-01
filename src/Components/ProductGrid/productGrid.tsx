@@ -7,7 +7,7 @@ import axios from "axios";
 import { SearchContext } from "../../Context/searchContext";
 import { useCartContext } from "../../Context/cartModalContext";
 
-const ProductGriSection = styled.section`
+const ProductGridSection = styled.section`
     padding: 60px 20px;
     background-color: #ffffff;
 `
@@ -83,7 +83,7 @@ function ProductGrid() {
 
     const title = "nossos queridinhos estão aqui";
     return (
-        <ProductGriSection>
+        <ProductGridSection data-testid="product-grid">
             <ProductGridContainer>
                 <ProductGridTitle>{title}</ProductGridTitle>
                 <ProductGridDiv>
@@ -99,7 +99,7 @@ function ProductGrid() {
 
                 </ProductGridDiv>
             </ProductGridContainer>
-        </ProductGriSection>
+        </ProductGridSection>
 
 
     );
