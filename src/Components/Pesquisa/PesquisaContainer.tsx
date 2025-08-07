@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Imput from "../Imput/input";
-import { useContext, useState } from "react";
+// import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { createContext } from "react";
-import { SearchContext } from "../../Context/searchContext";
+// import { createContext } from "react";
+// import { SearchContext } from "../../Context/searchContext";
 import useSearch from "../Hooks/useSearch";
 
 
@@ -33,7 +33,7 @@ const ButtonHeader = styled.button`
     justify-content: center; 
     transition: background-color 0.3s ease;          
 `
-const Search = createContext(SearchContext);
+// const Search = createContext(SearchContext);
 
 
 function Pesquisa() {

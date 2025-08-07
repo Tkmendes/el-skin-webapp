@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { useCartContext } from "../../Context/cartModalContext";
+// import { useCartContext } from "../../Context/cartModalContext";
 import React from "react";
+import { useCart } from "../Hooks/useCart";
+
 
 const CartModalOverlay = styled.div`
   position: fixed;
@@ -157,6 +159,7 @@ const QuantityButton = styled.button`
 
 &:hover {
   background: rgba(255, 255, 255, 0.1);
+}
 `
 
 const QuantityDisplay = styled.span`
@@ -181,6 +184,7 @@ const RemoveButton = styled.button`
 
 &:hover {
   background: rgba(239, 68, 68, 0.1);
+}
 `
 
 const CartItemPrice = styled.div`
@@ -228,7 +232,9 @@ const FinalizeButton = styled.button`
   background: linear-gradient(135deg, #7c3aed, #9333ea);
   transform: translateY(-1px);
   box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+}
 `
+
 interface CartModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -239,7 +245,7 @@ const CartModal: React.FC<CartModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { items, updateQuantity, removeItem, getTotalPrice } = useCartContext();
+  const { items, updateQuantity, removeItem, getTotalPrice } = useCart();
   if (!isOpen) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {

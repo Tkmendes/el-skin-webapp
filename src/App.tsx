@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from './Styles/theme';
 import Router from './routes'
-import { SearchContext } from './Context/searchContext';
+// import { SearchContext } from './Context/searchContext';
 import { CartModalProvider } from './Context/cartModalContext';
 import { GlobalStyle } from '../src/Styles/GlobalStyles';
 import { Provider } from 'react-redux';

@@ -1,11 +1,13 @@
 //import { DadosProduct } from "../DadosProduct/dadosProduct";
 import styled from "styled-components";
 import ProductCard from "../ProductCard/productCard"
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { IProduct } from "../ProductCard/productCard";
 import axios from "axios";
-import { SearchContext } from "../../Context/searchContext";
-import { useCartContext } from "../../Context/cartModalContext";
+// import { SearchContext } from "../../Context/searchContext";
+// import { useCartContext } from "../../Context/cartModalContext";
+import useSearch from "../Hooks/useSearch";
+import { useCart } from "../Hooks/useCart";
 
 const ProductGridSection = styled.section`
     padding: 60px 20px;
@@ -40,8 +42,8 @@ function ProductGrid() {
     const [products, setProduct] = useState<IProduct[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
-    const { search } = useContext(SearchContext);
-    const { addItem } = useCartContext();
+    const { term } = useSearch();
+    const { addItem } = useCart();
 
     useEffect(() => {
         async function fetchItems() {
@@ -54,15 +56,15 @@ function ProductGrid() {
     }, [])
 
     useEffect(() => {
-        if (search) {
+        if (term) {
             setFilteredProducts(products.filter(product =>
-                product.name.toLowerCase().includes(search.toLowerCase()) ||
-                product.description.toLowerCase().includes(search.toLowerCase())
+                product.name.toLowerCase().includes(term.toLowerCase()) ||
+                product.description.toLowerCase().includes(term.toLowerCase())
             ));
         } else {
             setFilteredProducts(products);
         }
-    }, [search, products])
+    }, [term, products])
 
     const handleProductClick = (productId: string) => {
         console.log(`Produto clicado: ${productId}`);
