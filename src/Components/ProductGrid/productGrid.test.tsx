@@ -3,9 +3,11 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
 import ProductGrid from "./productGrid";
-import { SearchContext } from '../../Context/searchContext';
-import { useCartContext, } from '../../Context/cartModalContext';
+// import { SearchContext } from '../../Context/searchContext';
+// import { useCartContext, } from '../../Context/cartModalContext';
 import { IProduct } from '../ProductCard/productCard';
+import { useCart } from "../Hooks/useCart"
+import useSearch from '../Hooks/useSearch';
 
 // 1. Mock do Axios para evitar chamadas de rede reais nos testes.
 jest.mock('axios');
@@ -24,12 +26,15 @@ jest.mock('../ProductCard/productCard', () => {
     );
 });
 
-// 3. Mock do hook `useCartContext` para fornecer uma função `addItem` controlável.
-jest.mock('../../Context/cartModalContext', () => ({
-    useCartContext: jest.fn(),
+// 3. Mock do hook `useCart` para fornecer uma função `addItem` controlável.
+jest.mock("../Hooks/useCart", () => ({
+    useCart: jest.fn(),
 }));
-const mockedUseCartContext = useCartContext as jest.Mock;
+const mockedUseCart = useCart as jest.Mock;
 
+// Mock do hook useSearch
+jest.mock('../Hooks/useSearch');
+const mockedUseSearch = useSearch as jest.Mock;
 
 // Dados de produtos que usaremos nos testes.
 const mockProducts: IProduct[] = [
@@ -77,8 +82,11 @@ describe('ProductGrid Component', () => {
 
         // Cria uma função de mock nova para `addItem` a cada teste.
         mockAddItem = jest.fn();
-        mockedUseCartContext.mockReturnValue({
+        mockedUseCart.mockReturnValue({
             addItem: mockAddItem,
+        });
+        mockedUseSearch.mockReturnValue({
+            term: '',
         });
     });
 
@@ -90,11 +98,9 @@ describe('ProductGrid Component', () => {
     // =================================================================
     // Teste 1: Renderização e busca de dados
     // =================================================================
-    test('should render and fetch products on mount', async () => {
+    test('deve renderizar e buscar produtos ao montar', async () => {
         render(
-            <SearchContext.Provider value={{ search: '', setSearch: () => { } }}>
-                <ProductGrid />
-            </SearchContext.Provider>
+            <ProductGrid />
         );
 
         // Verifica se o título é renderizado
@@ -115,11 +121,12 @@ describe('ProductGrid Component', () => {
     // =================================================================
     // Teste 2: Filtragem de produtos
     // =================================================================
-    test('should filter products based on search context', async () => {
+    test('deve filtrar produtos com base no contexto de busca', async () => {
+        mockedUseSearch.mockReturnValue({
+            term: 'Produto',
+        });
         render(
-            <SearchContext.Provider value={{ search: 'Produto', setSearch: () => { } }}>
-                <ProductGrid />
-            </SearchContext.Provider>
+            <ProductGrid />
         );
 
         // Espera a renderização inicial
@@ -139,11 +146,9 @@ describe('ProductGrid Component', () => {
     // =================================================================
     // Teste 3: Filtro sem resultados
     // =================================================================
-    test('should display nothing when search filter has no matches', async () => {
+    test('deve exibir nada quando o filtro de busca não tiver correspondências', async () => {
         render(
-            <SearchContext.Provider value={{ search: 'termo-inexistente', setSearch: () => { } }}>
-                <ProductGrid />
-            </SearchContext.Provider>
+            <ProductGrid />
         );
 
         await waitFor(() => {
@@ -159,11 +164,9 @@ describe('ProductGrid Component', () => {
     // =================================================================
     // Teste 4: Interação do botão "Comprar"
     // =================================================================
-    test('should call addItem from cart context when buy button is clicked', async () => {
+    test('deve chamar addItem do contexto de carrinho quando o botão comprar for clicado', async () => {
         render(
-            <SearchContext.Provider value={{ search: '', setSearch: () => { } }}>
-                <ProductGrid />
-            </SearchContext.Provider>
+            <ProductGrid />
         );
 
         // Espera os produtos serem renderizados
@@ -171,7 +174,7 @@ describe('ProductGrid Component', () => {
             expect(screen.getByText('Produto 2')).toBeInTheDocument();
         });
 
-        // Encontra o botão de comprar específico do "Produto 2" (graças ao nosso mock do ProductCard)
+        // Encontra o botão de comprar específico do "Produto 2" (graças ao mock do ProductCard)
         const buyButton = screen.getByRole('button', { name: /comprar produto 2/i });
         fireEvent.click(buyButton);
 
