@@ -5,6 +5,8 @@ import Router from './routes'
 import { SearchContext } from './Context/searchContext';
 import { CartModalProvider } from './Context/cartModalContext';
 import { GlobalStyle } from '../src/Styles/GlobalStyles';
+import { Provider } from 'react-redux';
+import { store } from './Store';
 
 
 const AppDiv = styled.div`
@@ -16,16 +18,18 @@ function App() {
 
   return (
 
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <AppDiv>
-        <CartModalProvider>
-          <SearchContext value={{ search: search, setSearch: setSearch }}>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <AppDiv>
+          <CartModalProvider>
+            {/* <SearchContext value={{ search: search, setSearch: setSearch }}> */}
             <Router />
-          </SearchContext>
-        </CartModalProvider>
-      </AppDiv>
-    </ThemeProvider>
+            {/* </SearchContext> */}
+          </CartModalProvider>
+        </AppDiv>
+      </ThemeProvider>
+    </Provider>
 
   );
 }

@@ -12,7 +12,7 @@ const mockedUseCartContext = useCartContext as jest.Mock;
 describe ('Header Component', () => {
     it('should render the header with the correct title', () => {
         // render(<HeaderComponents />);
-        // const headerElement = screen.getByText(/Alura Store/i);
+        // const headerElement = screen.getByText(/ALL SKIN/i);
         // expect(headerElement).toBeInTheDocument();
         expect(true).toBeTruthy();
     });

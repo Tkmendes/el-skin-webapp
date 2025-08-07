@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { createContext } from "react";
 import { SearchContext } from "../../Context/searchContext";
+import useSearch from "../Hooks/useSearch";
 
 
 const PesquisaContainer = styled.div`
@@ -37,7 +38,8 @@ const Search = createContext(SearchContext);
 
 function Pesquisa() {
     
-    const {search, setSearch} = useContext(SearchContext);
+    // const {search, setSearch} = useContext(SearchContext);
+    const { term, updateSearchTerm } = useSearch();
 
         // const buttonClick = (evento) => {
         //     const produtoDigitado = evento.target.value
@@ -46,20 +48,19 @@ function Pesquisa() {
         // };
     function handleClick(){ 
 
-
-        console.log(`Você pesquisou por: ${search}`); 
+        console.log(`Você pesquisou por: ${term}`); 
 
 
     };
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>){
         // Atualiza o estado com o valor atual do input.
-        setSearch(e.target.value);
+        updateSearchTerm(e.target.value);
     };
   
     return (
         
         <PesquisaContainer>
-            <Imput placeholder="O que você está procurando?" value={search} onChange={handleInputChange}/>
+            <Imput placeholder="O que você está procurando?" value={term} onChange={handleInputChange}/>
                 <ButtonHeader onClick={handleClick}>
                           <FontAwesomeIcon icon={faSearch} />
                 </ButtonHeader>
