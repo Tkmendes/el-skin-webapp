@@ -13,9 +13,18 @@ const FooterContainer = styled.div`
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+
+    @media screen and (max-width: 768px) {
+        padding: 0 10px;
+    }
+    
 `
 const FooterSocial = styled.div`
     padding: 40px 0;
+
+    @media screen and (max-width: 768px) {
+        padding: 30px 0;   
+    }
     
 `
 const SocialIcons = styled.div`
@@ -23,6 +32,10 @@ const SocialIcons = styled.div`
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 768px) {
+        gap: 15px;
+    }
     
 `
 
@@ -51,18 +64,35 @@ const SocialIcon = styled.div`
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(139, 74, 139, 0.3);   
     }
+
+    @media screen and (max-width: 768px) {
+         width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
 `
 
 /* Links Section */
 const FooterLinks = styled.div`
     background-color: #f8f9fa;
-    padding: 50px 0;''
+    padding: 50px 0;
+
+    @media screen and (max-width: 768px) {
+        padding: 0px;
+    }
 `
 
 const FooterSections = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 40px;
+
+    @media screen and (max-width: 768px) {
+        /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px; */
+        display: flex;
+        gap: 0.5rem;
+    }
 `
 
 const FooterSection = styled.section`
@@ -75,6 +105,11 @@ const FooterSectionTitle = styled.h3`
     color: #333;
     margin-bottom: 20px;
     margin-top: 0;
+
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
 `
 
 const FooterSectionLinks = styled.ul`
@@ -117,6 +152,10 @@ const FooterBottom = styled.div`
     color: white;
     padding: 30px 0;
     text-align: center;
+
+    @media screen and (max-width: 768px) {
+        padding: 25px 0;
+    }
 `
 
 const FooterBrandName = styled.div`
@@ -124,6 +163,10 @@ const FooterBrandName = styled.div`
     font-weight: 700;
     margin: 0 0 12px 0;
     color: white;
+
+    @media screen and (max-width: 768px) {
+        font-size: 20px;
+    }
 `
 
 const FooterCopyright = styled.div`
@@ -170,7 +213,7 @@ const Footer: React.FC = () => {
         {
             title: 'Atendimento',
             links: [
-                { label: 'oi@alskin.com.br', href: 'mailto:oi@alskin.com.br' },
+                { label: 'oi@alskin.com.br', href: '/mailto:oi@alskin.com.br' },
                 { label: 'ajuda', href: '/ajuda' }
             ]
         },
@@ -187,12 +230,12 @@ const Footer: React.FC = () => {
             <FooterContainer>
                 <FooterSocial>
                     <SocialIcons>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faInstagram} /></SocialIcon></a>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faFacebook} /></SocialIcon></a>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faYoutube} /></SocialIcon></a>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faPinterest} /></SocialIcon></a>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faTwitter} /></SocialIcon></a>
-                        <a href=""><SocialIcon><FontAwesomeIcon icon={faLinkedin} /></SocialIcon></a>
+                        <a href="/instagram"><SocialIcon><FontAwesomeIcon icon={faInstagram} /></SocialIcon></a>
+                        <a href="/facebook"><SocialIcon><FontAwesomeIcon icon={faFacebook} /></SocialIcon></a>
+                        <a href="/youtube"><SocialIcon><FontAwesomeIcon icon={faYoutube} /></SocialIcon></a>
+                        <a href="/pinterest"><SocialIcon><FontAwesomeIcon icon={faPinterest} /></SocialIcon></a>
+                        <a href="/twitter"><SocialIcon><FontAwesomeIcon icon={faTwitter} /></SocialIcon></a>
+                        <a href="/linkedin"><SocialIcon><FontAwesomeIcon icon={faLinkedin} /></SocialIcon></a>
                     </SocialIcons>
 
                 </FooterSocial>
@@ -212,7 +255,7 @@ const Footer: React.FC = () => {
                                     {section.links.map((link) => (
                                         <FooterSectionLinksLi key={link.label}>
 
-                                            <Link to={link.href}>
+                                            <Link to={link.href} >
                                                 {link.label}
                                             </Link>
                                         </FooterSectionLinksLi>
@@ -231,7 +274,7 @@ const Footer: React.FC = () => {
             </FooterContainer>
             <FooterBottom>
                 <FooterBrandName>
-                    <Logo color="white"></Logo>
+                    <Logo></Logo>
                 </FooterBrandName>
                 <FooterCopyright>
                     2023 AL SKIN. Todos os direitos reservados.

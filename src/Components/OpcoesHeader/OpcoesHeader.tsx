@@ -10,6 +10,17 @@ const Opcoes = styled.ul`
     position: absolute;
     left: calc(48% - 631px/2 - 260.5px);
     margin: 0px;
+
+     @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+
+        font-size: 10px;
+        max-width: 768px;
+        gap: 0.5rem;
+        align-items: center;
+        display: contents;
+
+        
+    }
 `
 const Opcao = styled.li`
     font-size: 14px;
@@ -19,10 +30,26 @@ const Opcao = styled.li`
     height: 100%;
     padding: 0 5px;
     cursor: pointer;
-    min-width: 120px;
+    min-width: 0.5 rem;
     list-style: none;
     font-weight: bold;
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+
+        font-size: 10px;
+        max-width: 768px;
+        gap: 0.5rem;
+    }
     
+`
+
+const Kitp = styled.p`
+    color: red;
+    margin-left: 9.5rem;
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+        margin-left: 0;
+    }
 `
 
 
@@ -39,7 +66,7 @@ function OpcoesHeader() {
                     <Opcao><p>{texto.nome}</p></Opcao>
                 </Link>
             ))}
-            <Opcao><p style={{ color: 'red' }}>Kits até 50% OFF</p></Opcao>
+            <Opcao><Kitp>Kits até 50% OFF</Kitp></Opcao>
         </Opcoes>
     );
 }

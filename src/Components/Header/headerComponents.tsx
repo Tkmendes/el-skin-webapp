@@ -8,28 +8,42 @@ import { Link } from "react-router-dom"
 
 
 const Container = styled.div`
-  max-width: 1200px; 
+  max-width: ${({ theme }) => theme.breakpoints.xl}; 
   margin: 0 auto; 
   padding: 0 1rem; 
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0rem;
+  }
 `
 
 const HeaderContainer = styled.header`
-  background-color: #ffffff; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  background-color: ${({ theme }) => theme.colors.background.white}; 
+  box-shadow: ${({ theme }) => theme.shadows.sm}; 
   
 `
 
 const HeaderTop = styled.div`
-  padding: 1rem 0; 
+  padding: ${({ theme }) => theme.spacing.md}; 
   border-bottom: 1px solid #e5e5e5;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0;
+
+  }
 `
 
 const OpcoesContainer = styled.div`
-  padding: 1rem 0;
-  margin-top: 2.5rem;
+  padding: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.xxl};
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: ${({ theme }) => theme.breakpoints.md};
+    margin-top: 0;
+  }
 `
 
 function HeaderComponents() {

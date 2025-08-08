@@ -8,6 +8,11 @@ const AboutContainer = styled.div`
     margin: 0 auto;
     padding: 60px 20px;
     font-family: 'Arial', sans-serif;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+        padding: 0.2rem;
+    }
 `
 const AboutContent = styled.div`
   display: grid;
@@ -15,6 +20,11 @@ const AboutContent = styled.div`
   gap: 80px;
   margin-bottom: 80px;
   align-items: start;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
 `
 
 const AboutTextSection = styled.h1`
@@ -42,7 +52,7 @@ const AboutSectionp = styled.p`
     font-size: 1rem;
     line-height: 1.8;
     color: #666;
-    margin: 0;
+    margin: 0.2rem;
 `
 
 const AboutImagesSection = styled.div`

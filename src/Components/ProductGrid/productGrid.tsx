@@ -11,10 +11,10 @@ import { useCart } from "../Hooks/useCart";
 
 const ProductGridSection = styled.section`
     padding: 60px 20px;
-    background-color: #ffffff;
+    background-color: ${({ theme }) => theme.colors.background.white};
 `
 const ProductGridContainer = styled.div`
-    max-width: 1200px;
+    max-width: ${({ theme }) => theme.breakpoints.xl};
     margin: 0 auto;
 `
 

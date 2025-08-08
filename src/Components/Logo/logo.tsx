@@ -4,20 +4,19 @@ import styled from "styled-components";
 const LogoHeader = styled.div`
     font-size: 24px; 
     font-weight: bold;
-    color: ${props => props.color ? 'white' : 'black'};
-    margin: 0; 
+    margin: 0.2em; 
     letter-spacing: 0.5px; 
     font-family: Shippori Antique;
     
     
-`
+`;
 
 
 const LogoTxt = styled.p`
   vertical-align: baseline;
-  
-`
-function Logo(props) {
+`;
+
+function Logo() {
     return (
 
         <LogoHeader>

@@ -14,6 +14,12 @@ const PesquisaContainer = styled.div`
     margin:  2rem; 
     position: relative; 
     display: flex;
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+        flex: 0.5; 
+        display: contents;
+
+    }
     
 `
 
@@ -31,7 +37,10 @@ const ButtonHeader = styled.button`
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    transition: background-color 0.3s ease;          
+    transition: background-color 0.3s ease; 
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}) {
+        display: none;
+    }
 `
 // const Search = createContext(SearchContext);
 
