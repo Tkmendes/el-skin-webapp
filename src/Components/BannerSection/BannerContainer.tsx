@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import { useGetCarouselItemsQuery } from '../../Store/slices/apiSlice';
 
 
 
@@ -123,46 +124,49 @@ interface ICarouselItem {
 const BannerContainer: React.FC = () => {
     const [idxItemAtual, setIdxItemAtual] = useState(0);
 
-    const [items, setItems] = useState<ICarouselItem[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    // const [items, setItems] = useState<ICarouselItem[]>([]);
+    // const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        async function fetchItems() {
-            try {
-                const newItems = await axios.get<ICarouselItem[]>('http://localhost:3001/carousel');
-                setItems(newItems.data);
-                setError(null);
-            } catch (err) {
-                if (axios.isAxiosError(err)) {
-                    if (err.response) {
-                        // O servidor respondeu com um código de status fora do intervalo 2xx
-                        setError(`Erro: ${err.response.status} - ${err.response.data}`);
-                    } else if (err.request) {
-                        // A requisição foi feita, mas nenhuma resposta foi recebida
-                        setError('Erro: Nenhuma resposta do servidor.');
-                    } else {
-                        // Algo aconteceu ao configurar a requisição que disparou um erro
-                        setError(`Erro: ${err.message}`);
-                    }
-                } else {
-                    setError('Erro desconhecido: ' + (err as Error).message);
-                }
-                setItems([]); // Limpa os dados em caso de erro
-            }
-        }
-        // catch(erro){
-        //      console.log(error);
-        //     }
-        //}    
-        // axios.get('http://localhost:3001/carousel')
-        //     .then(resposta => {
-        //         console.log(resposta.data[0].description)
-        //         setItems(resposta.data)
-        //     })
-        //     .catch(erro => {
-        //         console.log(erro)})
-        fetchItems();
-    }, [])
+    const { data: items = [], isLoading, error} = useGetCarouselItemsQuery();
+
+    // useEffect(() => {
+    //     async function fetchItems() {
+    //         try {
+    //             const newItems = await axios.get<ICarouselItem[]>('http://localhost:3001/carousel');
+    //             setItems(newItems.data);
+    //             setError(null);
+    //         } catch (error) {
+    //             setError('Erro ao carregar itens');
+    //             if (axios.isAxiosError(error)) {
+    //                 if (error.response) {
+    //                     // O servidor respondeu com um código de status fora do intervalo 2xx
+    //                     setError(`Erro: ${error.response.status} - ${error.response.data}`);
+    //                 } else if (error.request) {
+    //                     // A requisição foi feita, mas nenhuma resposta foi recebida
+    //                     setError('Erro: Nenhuma resposta do servidor.');
+    //                 } else {
+    //                     // Algo aconteceu ao configurar a requisição que disparou um erro
+    //                     setError(`Erro: ${error.message}`);
+    //                 }
+    //             } else {
+    //                 setError('Erro desconhecido: ' + (error as Error).message);
+    //             }
+    //             setItems([]); // Limpa os dados em caso de erro
+    //         }
+    //     }
+    //     // catch(erro){
+    //     //      console.log(error);
+    //     //     }
+    //     //}    
+    //     // axios.get('http://localhost:3001/carousel')
+    //     //     .then(resposta => {
+    //     //         console.log(resposta.data[0].description)
+    //     //         setItems(resposta.data)
+    //     //     })
+    //     //     .catch(erro => {
+    //     //         console.log(erro)})
+    //     fetchItems();
+    // }, [])
 
     function previousItem() {
         setIdxItemAtual((prevIdx) => (prevIdx === 0 ? items.length - 1 : prevIdx - 1));
@@ -187,9 +191,14 @@ const BannerContainer: React.FC = () => {
 
     return (
         <>
-            {items.length === 0 && <h6>Carregando...</h6>}
-            {items.length > 0 &&
+            {/* {items.length === 0 && <h6>Carregando...</h6>}
+            {items.length > 0 && */}
 
+                {isLoading && <h6>Carregando...</h6>}
+
+                {error && <p>Erro ao carregar produtos: {JSON.stringify(error)}</p>}
+                
+                {!isLoading && !error && (
                 <BannerSection style={{ backgroundImage: `url('${items[idxItemAtual].Image}')` }}>
                     <CarouselContainer>
                         <CarouselContent>
@@ -220,8 +229,9 @@ const BannerContainer: React.FC = () => {
 
 
                 </BannerSection>
-            }
-        </>
+                )}
+            </> 
+        
 
 
     )

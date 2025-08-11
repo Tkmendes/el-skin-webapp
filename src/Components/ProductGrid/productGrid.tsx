@@ -8,6 +8,7 @@ import axios from "axios";
 // import { useCartContext } from "../../Context/cartModalContext";
 import useSearch from "../Hooks/useSearch";
 import { useCart } from "../Hooks/useCart";
+import { useGetProductsQuery } from "../../Store/slices/apiSlice";
 
 const ProductGridSection = styled.section`
     padding: 60px 20px;
@@ -39,21 +40,22 @@ const ProductGridDiv = styled.div`
 function ProductGrid() {
 
     //const products = DadosProduct;
-    const [products, setProduct] = useState<IProduct[]>([]);
+    // const [products, setProduct] = useState<IProduct[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+    const { data: products = [], isLoading, error } = useGetProductsQuery();
 
     const { term } = useSearch();
     const { addItem } = useCart();
 
-    useEffect(() => {
-        async function fetchItems() {
+    // useEffect(() => {
+    //     async function fetchItems() {
 
-            const newItems = await axios.get<IProduct[]>('http://localhost:3001/products');
-            setProduct(newItems.data);
+    //         const newItems = await axios.get<IProduct[]>('http://localhost:3001/products');
+    //         setProduct(newItems.data);
 
-        }
-        fetchItems();
-    }, [])
+    //     }
+    //     fetchItems();
+    // }, [])
 
     useEffect(() => {
         if (term) {
@@ -89,7 +91,12 @@ function ProductGrid() {
             <ProductGridContainer>
                 <ProductGridTitle>{title}</ProductGridTitle>
                 <ProductGridDiv>
-                    {filteredProducts.map((product) => (
+
+                    {isLoading && <p>Carregando produtos...</p>}
+
+                    {error && <p>Erro ao carregar produtos: {JSON.stringify(error)}</p>}
+
+                    {!isLoading && !error && filteredProducts.map((product) => (
 
                         <ProductCard
                             key={product.id}

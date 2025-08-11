@@ -1,0 +1,44 @@
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { IProduct, useGetProductByIdQuery, useGetProductsQuery } from "./apiSlice";
+import { create } from "domain";
+
+export interface IProductState {
+    products: IProduct[];
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: IProductState = {
+    products: [],
+    loading: false,
+    error: null,
+};
+
+export const fetchProducts = createAsyncThunk("products/fetchProducts",
+    async () => {
+        const products = await useGetProductsQuery();
+        return products;
+    }
+);
+
+export const fetchProductById = createAsyncThunk("products/fetchProductById",
+    async (id: string) => {
+        const product = await useGetProductByIdQuery(id);
+        return product;
+    }
+);
+
+const productSlice = createSlice({
+    name: "products",
+    initialState,
+
+    reducers: {
+         loadProductsById: (state, action: PayloadAction<string>) => {
+             state.loading = true;
+         }
+    },
+});
+
+export const { loadProductsById } = productSlice.actions;
+
+export default productSlice.reducer;

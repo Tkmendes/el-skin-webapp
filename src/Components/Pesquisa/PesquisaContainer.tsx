@@ -69,7 +69,7 @@ function Pesquisa() {
     return (
         
         <PesquisaContainer>
-            <Imput placeholder="O que você está procurando?" value={term} onChange={handleInputChange}/>
+            <Imput id="search-input" placeholder="O que você está procurando?" onChange={handleInputChange}/>
                 <ButtonHeader onClick={handleClick}>
                           <FontAwesomeIcon icon={faSearch} />
                 </ButtonHeader>
