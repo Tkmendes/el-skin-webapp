@@ -1,9 +1,11 @@
+'use client';
 import styled from "styled-components"
 import { faFacebook, faInstagram, faLinkedin, faPinterest, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 // import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Logo from "../Logo/logo";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const FooterDiv = styled.footer`
     background-color: #f8f9fa;
@@ -198,9 +200,9 @@ const Footer: React.FC = () => {
         {
             title: 'Sobre a AL SKIN',
             links: [
-                { label: 'quem somos', href: '/sobre' },
-                { label: 'time AL SKIN', href: '/sobre' },
-                { label: 'carreiras', href: '/sobre' }
+                { label: 'quem somos', href: '/about' },
+                { label: 'time AL SKIN', href: '/about' },
+                { label: 'carreiras', href: '/about' }
             ]
         },
         {
@@ -255,7 +257,14 @@ const Footer: React.FC = () => {
                                     {section.links.map((link) => (
                                         <FooterSectionLinksLi key={link.label}>
 
-                                            <Link to={link.href} >
+                                            <Link 
+                                                href={link.href}
+                                                style={{
+                                                    color: '#6c757d',
+                                                    textDecoration: 'none',
+                                                    transition: 'color 0.3s ease',
+                                                }}
+                                            >
                                                 {link.label}
                                             </Link>
                                         </FooterSectionLinksLi>

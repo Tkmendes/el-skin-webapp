@@ -1,3 +1,5 @@
+'use client'
+
 //import { DadosProduct } from "../DadosProduct/dadosProduct";
 import styled from "styled-components";
 import ProductCard from "../ProductCard/productCard"

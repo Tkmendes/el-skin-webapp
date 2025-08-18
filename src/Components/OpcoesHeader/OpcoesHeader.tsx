@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+'use client';
+import Link from "next/link";
 import styled from "styled-components"
 
 const Opcoes = styled.ul`
@@ -59,7 +60,7 @@ function OpcoesHeader() {
     return (
         <Opcoes>
             {textoOpcoes.map((texto) => (
-                <Link to={texto.src} key={texto.nome} style={{
+                <Link href={texto.src} key={texto.nome} style={{
                     color: 'black',
                     textDecoration: 'none',
                 }}>

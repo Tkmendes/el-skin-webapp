@@ -1,10 +1,10 @@
-
+'use client';
 import styled from "styled-components"
 import Logo from "../Logo/logo"
 import Pesquisa from "../Pesquisa/PesquisaContainer"
 import OpcoesHeader from "../OpcoesHeader/OpcoesHeader"
 import CartButton from "../CartButton/cartButton"
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 
 const Container = styled.div`
@@ -52,10 +52,10 @@ function HeaderComponents() {
     <HeaderContainer>
       <HeaderTop>
         <Container>
-          <Link style={{
+          <Link href="/" style={{
             color: 'black',
             textDecoration: 'none',
-          }} to={"/"}>
+          }}>
             <Logo />
           </Link>
 
